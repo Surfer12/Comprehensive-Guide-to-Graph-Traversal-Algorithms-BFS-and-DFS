@@ -12,7 +12,7 @@ Code Quality (30%):
 Code is well-structured, readable, and follows good programming practices.
 Includes meaningful variable names and comments where necessary. -->
 
-#Depth-First Search(DFS)
+# Depth-First Search(DFS)
 
 ## Introduction to DFS
 

@@ -47,6 +47,15 @@ public void preOrderPathTraversal(int source, int target, int[] parent) {
    System.out.print(target + " ");
 }
 
+How does the BFS algorithm handle cycles in a graph?
+The BFS algorithm handles cycles in a graph by using a visited array to keep track of the nodes that have already been visited. This prevents the algorithm from revisiting nodes and getting stuck in an infinite loop.
+
+In the BFS implementation in 
+Breadth First Search (BFS).md
+, a visited array is used to mark nodes as visited.
+When a node is dequeued, its neighbors are checked. If a neighbor has not been visited, it is marked as visited and added to the queue.
+This ensures that each node is processed only once, effectively handling cycles by preventing the algorithm from revisiting nodes.
+
 ## Complexity Analysis
 
 The time and space complexity of the Breadth-First Search (BFS) algorithm can be analyzed based on the following variables:
