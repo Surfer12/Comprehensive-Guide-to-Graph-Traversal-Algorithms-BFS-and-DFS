@@ -235,42 +235,19 @@ private void bfsRecursiveUtil(List<Integer> queue, boolean[] visited) {
 // ... existing code ...
 ```
 
+## Applications beyond shortest paths
+While BFS excels at finding the shortest path in unweighted graphs, its level-by-level exploration is valuable in other scenarios:
+* Finding connected components: BFS can identify all nodes reachable from a starting node, effectively grouping connected components in a graph.
+* Testing bipartiteness: BFS can determine if a graph is bipartite (can be colored with two colors such that no adjacent nodes have the same color).
+* Crawling web pages: Search engines often use a modified BFS approach to crawl web pages, starting from a seed page and following links level by level.
 
-* Applications beyond shortest paths: While BFS excels at finding the shortest path in unweighted graphs, its level-by-level
-exploration is valuable in other scenarios:
-   * Finding connected components: BFS can identify all nodes reachable from a starting node, effectively grouping connected
-components in a graph.
-   * Testing bipartiteness: BFS can determine if a graph is bipartite (can be colored with two colors such that no adjacent
-nodes have the same color).
-   * Crawling web pages: Search engines often use a modified BFS approach to crawl web pages, starting from a seed page and
-following links level by level.
-* Variations and optimizations:
-   * Bidirectional BFS: When searching for a path between two specific nodes, you can run two BFS searches simultaneously,
-one from each node, potentially finding the path faster.
-   * Parallel BFS: For large graphs, BFS can be parallelized to explore multiple branches concurrently, speeding up the
-search.
-
-## Depth-First Search (DFS) - Further Exploration
-* Applications beyond cycle detection: DFS is versatile and finds use in various graph problems:
-   * Topological sorting: In directed acyclic graphs (DAGs), DFS can order nodes such that for every directed edge from node
-A to node B, A appears before B in the ordering.
-   * Finding strongly connected components: In directed graphs, DFS can identify groups of nodes where every node is
-reachable from every other node within the group.
-   * Solving puzzles with backtracking: DFS is the backbone of backtracking algorithms, used to explore possible solutions
-in problems like Sudoku and the N-Queens puzzle.
-* Variations and optimizations:
-   * Iterative deepening DFS: Combines the space efficiency of DFS with the completeness of BFS by performing depth-limited
-DFS searches with increasing depth limits.
-   * DFS with pruning: In problem-solving scenarios, DFS can be optimized by pruning branches that are guaranteed not to
-lead to a solution.
+## Variations and optimizations
+* Bidirectional BFS: When searching for a path between two specific nodes, you can run two BFS searches simultaneously, one from each node, potentially finding the path faster.
+* Parallel BFS: For large graphs, BFS can be parallelized to explore multiple branches concurrently, speeding up the search.
 
 ## Comparing BFS and DFS
-* Memory usage: DFS generally uses less memory than BFS, especially in deep graphs, as it only needs to store the nodes
-along the current path. BFS, on the other hand, stores all nodes at the current level, which can be memory-intensive for
-wide graphs.
-* Speed: The relative speed of BFS and DFS depends on the graph structure and the problem being solved. If the solution is
-likely to be found at shallower depths, BFS might be faster. If the solution is deep within the graph or requires exploring
-a specific path, DFS might be more efficient.
+* Memory usage: DFS generally uses less memory than BFS, especially in deep graphs, as it only needs to store the nodes along the current path. BFS, on the other hand, stores all nodes at the current level, which can be memory-intensive for wide graphs.
+* Speed: The relative speed of BFS and DFS depends on the graph structure and the problem being solved. If the solution is likely to be found at shallower depths, BFS might be faster. If the solution is deep within the graph or requires exploring a specific path, DFS might be more efficient.
 
 ## Choosing the right algorithm
 The choice between BFS and DFS depends on the specific application and the characteristics of the graph:
@@ -279,8 +256,6 @@ The choice between BFS and DFS depends on the specific application and the chara
 * Cycle detection: DFS is typically used for cycle detection.
 * Topological sorting: DFS is necessary for topological sorting.
 * Memory constraints: If memory is a concern, DFS is generally more memory-efficient.
-
-
 
 ## Key Differences and Applications:
 Feature
