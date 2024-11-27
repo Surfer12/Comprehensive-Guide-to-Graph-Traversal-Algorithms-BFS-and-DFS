@@ -1,5 +1,5 @@
 // Write a Java method to calculate the height of a binary tree.
-
+// You can use any traversal method to calculate the height of the binary tree.
 import java.util.Comparator;
 
 public class HeightOfBinaryTree {
@@ -18,15 +18,27 @@ public class HeightOfBinaryTree {
 
 // DETERMINE THE HEIGHT OF THE BINARY TREE USING a traversal method.
     // Method to calculate the height of the binary tree using recursive traversal
+
+    public void dfsTraversal(Node root) {
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.data + " ");
+        dfsTraversal(root.left);
+        dfsTraversal(root.right);
+        root.data++;
+    }
+
     public int calculateHeight(Node root) {
         // Base case: if the node is null, height is 0
         if (root == null) {
             return 0;
         }
-        
-        // Recursively calculate the height of left and right subtrees
-        int leftHeight = calculateHeight(root.left);
-        int rightHeight = calculateHeight(root.right);
+
+
+        int leftHeight = dfsTraversal(root.left);
+        int rightHeight = dfsTraversal(root.right);
+
         
         // Return the maximum height plus 1 (to account for the current node)
         return Math.max(leftHeight, rightHeight) + 1;
@@ -43,13 +55,14 @@ public class HeightOfBinaryTree {
         if (root == null) {
             return 0;
         }
-        
+
         // Find the height of the left and right subtrees in the given binary tree
-        // Determine which one is greater and return the greater value. 
-        int leftHeight = calculateHeight(root.left);
-        int rightHeight = calculateHeight(root.right);
+        // Determine which one is greater and return the greater value.
+        int leftHeight = dfsTraversal(root.left);
+        int rightHeight = dfsTraversal(root.right);
         
-        return Math.max(leftHeight, rightHeight) + 1;
+        // Determine which one is greater and return the greater value. 
+        return HeightComparator.compare(root, root.left) > HeightComparator.compare(root, root.right) ? leftHeight : rightHeight;
         
     }
 }
