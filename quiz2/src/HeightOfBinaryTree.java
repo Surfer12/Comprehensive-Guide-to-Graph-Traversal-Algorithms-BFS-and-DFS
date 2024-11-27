@@ -1,5 +1,5 @@
-import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class HeightOfBinaryTree {
     
@@ -9,8 +9,9 @@ public class HeightOfBinaryTree {
         Node left, right;
         
         public Node(int item) {
-            data = item;
-            left = right = null;
+            this.data = item;
+            this.left = null;
+            this.right = null;
         }
 
         public Node(int data, Node left, Node right) {
@@ -26,7 +27,7 @@ public class HeightOfBinaryTree {
      * @param root The root node of the binary tree
      * @return The height of the tree. If the tree is empty, returns 0.
      */
-    public int calculateHeightRecursive(Node root) {
+    public int calculateHeightRecursive(Node root) { 
         if (root == null) {
             return 0;  // Base case: empty tree has height 0
         }
@@ -42,22 +43,19 @@ public class HeightOfBinaryTree {
      */
     public int calculateHeightIterative(Node root) {
         if (root == null) {
-            return 0;  // If root is null, tree is empty, height is 0
+            return 0;
         }
 
         Queue<Node> queue = new LinkedList<>();
         queue.offer(root);
-        queue.offer(null);  // End of current level marker
         int height = 0;
 
         while (!queue.isEmpty()) {
-            Node node = queue.poll();
-            if (node == null) {
-                if (!queue.isEmpty()) {
-                    queue.offer(null);  // Add level marker for next level
-                }
-                height++;
-            } else {
+            int levelSize = queue.size();
+            
+            for (int i = 0; i < levelSize; i++) {
+                Node node = queue.poll();
+                
                 if (node.left != null) {
                     queue.offer(node.left);
                 }
@@ -65,6 +63,8 @@ public class HeightOfBinaryTree {
                     queue.offer(node.right);
                 }
             }
+            
+            height++;
         }
         return height;
     }
@@ -79,11 +79,13 @@ public class HeightOfBinaryTree {
         root.right = new Node(3);
         root.left.left = new Node(4);
         root.left.right = new Node(5);
+        root.right.left = new Node(6);
+        root.right.right = new Node(7);
+        root.left.left.left = new Node(8);
         
         // Calculate and print the height using recursive method
-        int heightRecursive = tree.calculateHeight(root);
+        int heightRecursive = tree.calculateHeightRecursive(root);
         System.out.println("Height of the binary tree (Recursive): " + heightRecursive);
-
         // Calculate and print the height using iterative method
         int heightIterative = tree.calculateHeightIterative(root);
         System.out.println("Height of the binary tree (Iterative): " + heightIterative);
