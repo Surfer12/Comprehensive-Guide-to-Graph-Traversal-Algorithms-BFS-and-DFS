@@ -25,6 +25,14 @@ Adjacency Matrix:
 
 //For the graph shown, implement it in Java, you can choose any of the graph representation techniques.
 
-public class Adjlistandmatrix {
+import java.util.Map;
+import java.util.Set;
 
+public class Adjlistandmatrix {
+  public void printGraph() {
+        for (Map.Entry<T, Set<T>> entry : adjacencyGraph.entrySet()) {
+            System.out.print(entry.getKey() + " -> ");
+            System.out.println(entry.getValue());
+        }
+    }
 }
