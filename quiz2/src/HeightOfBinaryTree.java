@@ -3,6 +3,7 @@
 import java.util.Comparator;
 
 public class HeightOfBinaryTree {
+    int height = 0;
  public class Node {
     int data;
     Node left, right;
@@ -19,14 +20,17 @@ public class HeightOfBinaryTree {
 // DETERMINE THE HEIGHT OF THE BINARY TREE USING a traversal method.
     // Method to calculate the height of the binary tree using recursive traversal
 
-    public void dfsTraversal(Node root) {
+    public int dfsTraversal(Node root) {
         if (root == null) {
-            return;
-        }
+            return 0;
+        }   
         System.out.print(root.data + " ");
         dfsTraversal(root.left);
         dfsTraversal(root.right);
         root.data++;
+        height = Math.max(height, root.data);
+
+        return height;
     }
 
     public int calculateHeight(Node root) {
@@ -43,7 +47,6 @@ public class HeightOfBinaryTree {
         // Return the maximum height plus 1 (to account for the current node)
         return Math.max(leftHeight, rightHeight) + 1;
     }
-
 
     public class HeightComparator implements Comparator<Node> {
         public int compare(Node node1, Node node2) {
