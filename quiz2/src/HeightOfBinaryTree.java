@@ -1,72 +1,91 @@
-// Write a Java method to calculate the height of a binary tree.
-// You can use any traversal method to calculate the height of the binary tree.
-import java.util.Comparator;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class HeightOfBinaryTree {
-    int height = 0;
- public class Node {
-    int data;
-    Node left, right;
-    Node(int item) {
-        data = item;
-        left = right = null;
-    }
-    Node(int data, Node left, Node right) {
-        this.data = data;
-        this.left = left;
-        this.right = right;
+    
+    // Nested Node class
+    public static class Node {
+        int data;
+        Node left, right;
+        
+        public Node(int item) {
+            data = item;
+            left = right = null;
+        }
+
+        public Node(int data, Node left, Node right) {
+            this.data = data;
+            this.left = left;
+            this.right = right;
+        }
     }
 
-// DETERMINE THE HEIGHT OF THE BINARY TREE USING a traversal method.
-    // Method to calculate the height of the binary tree using recursive traversal
-
-    public int dfsTraversal(Node root) {
+    /**
+     * Calculates the height of the binary tree recursively.
+     * 
+     * @param root The root node of the binary tree
+     * @return The height of the tree. If the tree is empty, returns 0.
+     */
+    public int calculateHeightRecursive(Node root) {
         if (root == null) {
-            return 0;
-        }   
-        System.out.print(root.data + " ");
-        dfsTraversal(root.left);
-        dfsTraversal(root.right);
-        root.data++;
-        height = Math.max(height, root.data);
+            return 0;  // Base case: empty tree has height 0
+        }
+        // Recursively find height of left and right subtrees and take the maximum
+        return Math.max(calculateHeightRecursive(root.left), calculateHeightRecursive(root.right)) + 1;
+    }
 
+    /**
+     * Calculates the height of the binary tree iteratively using level order traversal.
+     * 
+     * @param root The root node of the binary tree
+     * @return The height of the tree. If the tree is empty, returns 0.
+     */
+    public int calculateHeightIterative(Node root) {
+        if (root == null) {
+            return 0;  // If root is null, tree is empty, height is 0
+        }
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        queue.offer(null);  // End of current level marker
+        int height = 0;
+
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            if (node == null) {
+                if (!queue.isEmpty()) {
+                    queue.offer(null);  // Add level marker for next level
+                }
+                height++;
+            } else {
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+            }
+        }
         return height;
     }
 
-    public int calculateHeight(Node root) {
-        // Base case: if the node is null, height is 0
-        if (root == null) {
-            return 0;
-        }
-
-
-        int leftHeight = dfsTraversal(root.left);
-        int rightHeight = dfsTraversal(root.right);
-
+    // Main method to demonstrate usage
+    public static void main(String[] args) {
+        HeightOfBinaryTree tree = new HeightOfBinaryTree();
         
-        // Return the maximum height plus 1 (to account for the current node)
-        return Math.max(leftHeight, rightHeight) + 1;
-    }
-
-    public class HeightComparator implements Comparator<Node> {
-        public int compare(Node node1, Node node2) {
-            return Integer.compare(node1.data, node2.data);
-        }
-    }
-
-    public int heightOfBinaryTreeMethod(Node root) {
-        if (root == null) {
-            return 0;
-        }
-
-        // Find the height of the left and right subtrees in the given binary tree
-        // Determine which one is greater and return the greater value.
-        int leftHeight = dfsTraversal(root.left);
-        int rightHeight = dfsTraversal(root.right);
+        // Example tree creation
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
         
-        // Determine which one is greater and return the greater value. 
-        return HeightComparator.compare(root, root.left) > HeightComparator.compare(root, root.right) ? leftHeight : rightHeight;
-        
+        // Calculate and print the height using recursive method
+        int heightRecursive = tree.calculateHeight(root);
+        System.out.println("Height of the binary tree (Recursive): " + heightRecursive);
+
+        // Calculate and print the height using iterative method
+        int heightIterative = tree.calculateHeightIterative(root);
+        System.out.println("Height of the binary tree (Iterative): " + heightIterative);
     }
-}
 }

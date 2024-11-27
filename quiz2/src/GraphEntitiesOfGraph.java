@@ -1,17 +1,14 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.ArrayList;
 public class GraphEntitiesOfGraph<T, V> {
-    private HashMap<T, List<V>> adjVertices; 
+    private HashMap<T, ArrayList<V>> adjVertices; 
 
- public HashMap<T, List<V>> CreateAdjVerticesHashMap(HashMap<T, List<V>> adjVertices) {
+ public HashMap<T, ArrayList<V>> CreateAdjVerticesHashMap(HashMap<T, ArrayList<V>> adjVertices) {
     this.adjVertices = adjVertices;
     return adjVertices;
  }
 
- public HashMap<T, List<V>> getAdjVerticesMap() {
+ public HashMap<T, ArrayList<V>> getAdjVerticesMap() {
     return adjVertices;
  }
 
@@ -20,13 +17,13 @@ public class GraphEntitiesOfGraph<T, V> {
         adjVertices.get(source).add(destination);
     }
     public void printGraph() {
-        for (HashMap.Entry<T, List<V>> entry : adjVertices.entrySet()) {
+        for (HashMap.Entry<T, ArrayList<V>> entry : adjVertices.entrySet()) {
             System.out.println("Source Node: " + entry.getKey() + ": " + "Destination Node: " + entry.getValue());
         }
     }
     public static void main(String[] args) {
         GraphEntitiesOfGraph<Integer, Integer> graphOne = new GraphEntitiesOfGraph<>();
-        graphOne.CreateAdjVerticesHashMap(new HashMap<Integer, List<Integer>>());
+        graphOne.CreateAdjVerticesHashMap(new HashMap<Integer, ArrayList<Integer>>());
         graphOne.placeSourceAndDestination(1, 2);
         graphOne.placeSourceAndDestination(1, 3);
         graphOne.placeSourceAndDestination(1, 4);
