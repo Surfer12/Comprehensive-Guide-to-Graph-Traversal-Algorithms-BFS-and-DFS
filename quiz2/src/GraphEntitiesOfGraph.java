@@ -20,7 +20,7 @@ public class GraphEntitiesOfGraph<T, V> {
         adjVertices.get(source).add(destination);
     }
     public void printGraph() {
-        for (Map.Entry<T, List<V>> entry : adjVertices.entrySet()) {
+        for (HashMap.Entry<T, List<V>> entry : adjVertices.entrySet()) {
             System.out.println("Source Node: " + entry.getKey() + ": " + "Destination Node: " + entry.getValue());
         }
     }
