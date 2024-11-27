@@ -1,4 +1,7 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GraphEntitiesOfGraph {
 
@@ -15,14 +18,14 @@ class GraphVertices<T> {
         adjVertices.putIfAbsent(sourceNode, new ArrayList<>());
     }
 
-    public void addDestination(T source, T destination) {
+    public void placeSourceAndDestination(T source, T destination) {
         adjVertices.get(source).add(destination);
         adjVertices.get(destination).add(source); // For an undirected graph, edges are bidirectional
     }
 
     public void printGraph() {
         for (Map.Entry<T, List<T>> entry : adjVertices.entrySet()) {
-            System.out.println("Vertex " + entry.getKey() + ": " + entry.getValue());
+            System.out.println("Source Node: " + entry.getKey() + ": " + "Destination Node: " + entry.getValue());
         }
     }
 
@@ -31,12 +34,12 @@ class GraphVertices<T> {
         for (int i = 1; i <= 7; i++) {
             g.addSourceNode(i);
         }
-        g.addDestination(1, 2);
-        g.addDestination(1, 3);
-        g.addDestination(1, 4);
-        g.addDestination(2, 3);
-        g.addDestination(3, 5);
-        g.addDestination(3, 6);
+        g.placeSourceAndDestination(1, 2);
+        g.placeSourceAndDestination(1, 3);
+        g.placeSourceAndDestination(1, 4);
+        g.placeSourceAndDestination(2, 3);
+        g.placeSourceAndDestination(3, 5);
+        g.placeSourceAndDestination(3, 6);
 
         g.printGraph();
     }
