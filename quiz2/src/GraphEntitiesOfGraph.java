@@ -3,45 +3,56 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GraphEntitiesOfGraph {
+public class GraphEntitiesOfGraph<T, V> {
+    private HashMap<T, List<V>> adjVertices; 
 
-}
+ public HashMap<T, List<V>> CreateAdjVerticesHashMap(HashMap<T, List<V>> adjVertices) {
+    this.adjVertices = adjVertices;
+    return adjVertices;
+ }
 
-class GraphVertices<T> {
-    private Map<T, List<T>> adjVertices;
+ public HashMap<T, List<V>> getAdjVerticesMap() {
+    return adjVertices;
+ }
 
-    public GraphVertices() {
-        this.adjVertices = new HashMap<>();
-    }
-
-    public void addSourceNode(T sourceNode) {
-        adjVertices.putIfAbsent(sourceNode, new ArrayList<>());
-    }
-
-    public void placeSourceAndDestination(T source, T destination) {
+    public void placeSourceAndDestination(T source, V destination) {
+        adjVertices.putIfAbsent(source, new ArrayList<>());
         adjVertices.get(source).add(destination);
-        adjVertices.get(destination).add(source); // For an undirected graph, edges are bidirectional
     }
-
     public void printGraph() {
-        for (Map.Entry<T, List<T>> entry : adjVertices.entrySet()) {
+        for (Map.Entry<T, List<V>> entry : adjVertices.entrySet()) {
             System.out.println("Source Node: " + entry.getKey() + ": " + "Destination Node: " + entry.getValue());
         }
     }
-
     public static void main(String[] args) {
-        GraphVertices<Integer> g = new GraphVertices<>();
-        for (int i = 1; i <= 7; i++) {
-            g.addSourceNode(i);
-        }
-        g.placeSourceAndDestination(1, 2);
-        g.placeSourceAndDestination(1, 3);
-        g.placeSourceAndDestination(1, 4);
-        g.placeSourceAndDestination(2, 3);
-        g.placeSourceAndDestination(3, 5);
-        g.placeSourceAndDestination(3, 6);
+        GraphEntitiesOfGraph<Integer, Integer> graphOne = new GraphEntitiesOfGraph<>();
+        graphOne.CreateAdjVerticesHashMap(new HashMap<Integer, List<Integer>>());
+        graphOne.placeSourceAndDestination(1, 2);
+        graphOne.placeSourceAndDestination(1, 3);
+        graphOne.placeSourceAndDestination(1, 4);
+        graphOne.placeSourceAndDestination(2, 1);
+        graphOne.placeSourceAndDestination(2, 3);   
+        graphOne.placeSourceAndDestination(3, 1);
+        graphOne.placeSourceAndDestination(3, 2);
+        graphOne.placeSourceAndDestination(3, 5);
+        graphOne.placeSourceAndDestination(3, 6);
+        graphOne.placeSourceAndDestination(4, 1);
+        graphOne.placeSourceAndDestination(5, 3);
+        graphOne.placeSourceAndDestination(5, 6);
+        graphOne.placeSourceAndDestination(6, 5);
+        graphOne.placeSourceAndDestination(7, 0);
+        graphOne.getAdjVerticesMap();
 
-        g.printGraph();
+        graphOne.printGraph();
     }
 }
 
+/* Output : 
+Source Node: 1: Destination Node: [2, 3, 4]
+Source Node: 2: Destination Node: [1, 3]
+Source Node: 3: Destination Node: [1, 2, 5, 6]
+Source Node: 4: Destination Node: [1]
+Source Node: 5: Destination Node: [3, 6]
+Source Node: 6: Destination Node: [5]
+Source Node: 7: Destination Node: [0]
+*/
